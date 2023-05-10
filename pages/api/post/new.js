@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   if (session) {
     req.body.author = session.user.email;
   }
-  console.log(session);
   if (req.method === "POST") {
     if (req.body.title === "") {
       return res.status(500).json("제목을 입력해주세요");
