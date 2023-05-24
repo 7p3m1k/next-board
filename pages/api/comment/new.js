@@ -12,6 +12,7 @@ export default async function handler(res, req) {
       content: res.body.comment,
       parent: new ObjectId(res.body._id),
       author: session.user.email,
+      author_name: session.user.name,
     };
 
     const db = (await connectDB).db("forum");

@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
       <body className={inter.className}>
         <div className="navbar">
           <Link href="/" className="logo">
-            Appleforum
+            게시판
           </Link>
           <Link href="/list">List</Link>
           {session ? (

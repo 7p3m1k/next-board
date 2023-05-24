@@ -11,7 +11,6 @@ export default async function handler(req, res) {
     let find = await db
       .collection("post")
       .findOne({ _id: new ObjectId(req.body) });
-    console.log("searchUser", searchUser);
 
     if (find.author == session.user.email) {
       let result = await db

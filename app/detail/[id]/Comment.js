@@ -18,7 +18,14 @@ export default function Comment(props) {
     <div>
       <hr />
       {data.length > 0
-        ? data.map((a, i) => <p key={i}>{a.content}</p>)
+        ? data.map((a, i) => (
+            <div>
+              <span k={i}>[ {a.author_name} ]</span>
+              <span style={{ color: "blue" }} key={i}>
+                {a.content}
+              </span>
+            </div>
+          ))
         : "댓글없음"}
       <input
         onChange={(e) => {
@@ -27,7 +34,6 @@ export default function Comment(props) {
       />
       <button
         onClick={() => {
-          console.log(comment);
           fetch("/api/comment/new", {
             method: "POST",
             body: JSON.stringify({ comment: comment, _id: props._id }),
