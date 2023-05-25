@@ -1,12 +1,11 @@
 import Link from "next/link";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import LoginBtn from "./LoginBtn";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import LogOutBtn from "./LogOutBtn";
-
-const inter = Inter({ subsets: ["latin"] });
+import { cookies } from "next/headers";
+import DarkMode from "./DarkMode";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,9 +14,16 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions);
+
+  let cookie = cookies().get("mode");
+
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html>
+      <body
+        className={
+          cookie != undefined && cookie.value == "dark" ? "dark-mode" : ""
+        }
+      >
         <div className="navbar">
           <Link href="/" className="logo">
             게시판
@@ -25,12 +31,13 @@ export default async function RootLayout({ children }) {
           <Link href="/list">List</Link>
           {session ? (
             <div>
-              <div>{session.user.name}</div>
+              <div className="name">{session.user.name}</div>
               <LogOutBtn />
             </div>
           ) : (
             <LoginBtn />
           )}
+          <DarkMode />
         </div>
         {children}
       </body>
