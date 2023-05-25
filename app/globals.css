@@ -71,6 +71,8 @@ a {
   color: white;
 }
 
-.darkBtn {
+.darkModeBtn {
+  display: inline-block;
+  margin-left: 20px;
   cursor: pointer;
 }

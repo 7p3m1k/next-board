@@ -16,8 +16,8 @@ export default function DarkMode() {
   }, []);
 
   return (
-    <div
-      className="darkBtn"
+    <span
+      className="darkModeBtn"
       onClick={() => {
         let cookieValue = ("; " + document.cookie)
           .split(`; mode=`)
@@ -32,7 +32,7 @@ export default function DarkMode() {
         }
       }}
     >
-      <span>🌙</span>
-    </div>
+      {document.cookie == "mode=light" ? <span>☀️</span> : <span>🌙</span>}
+    </span>
   );
 }
